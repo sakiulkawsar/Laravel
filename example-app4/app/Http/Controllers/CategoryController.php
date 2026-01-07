@@ -32,14 +32,29 @@ class CategoryController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
+    //validation
     {
+
+          $request->validate(
+        [
+            'cat_name' => 'required:max:10|min:3|unique:categories,name'  //validation rule
+
+
+
+        ],
+        [
+            'required' => 'Category name must be enterd',
+            'min' => 'Category name must be 3',
+            'max' => 'Category name must be 10',
+        ]
+    );
         //dd($request);
         //return "Eikhane ami";
         $category =[
         'name' =>$request->cat_name
         ];
         Category::create($category);
-        return redirect('/dashboard');
+        return redirect()->route('category.index')->with('success','Category created successfully');
     }
 
     /**
@@ -57,7 +72,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('backend.category.edit');
+        // return view('backend.category.edit');
+        return view('backend.category.edit',compact('category'));
     }
 
     /**
@@ -65,7 +81,25 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+    $request->validate(
+        [
+            'cat_name' => 'required:max:10|min:3|unique:categories,name'  //validation rule
+
+
+
+        ],
+        [
+            'required' => 'Category name must be enterd',
+            'min' => 'Category name must be 3',
+            'max' => 'Category name must be 10',
+        ]
+    );
+  
+        $data = [
+            'name' => $request->cat_name
+        ];
+        $category->update($data);
+        return redirect()->route('category.index')->with('success','Category updated successfully');
     }
 
     /**
@@ -73,6 +107,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->route('category.index')->with('success','Category deleted successfully');
     }
+    
 }

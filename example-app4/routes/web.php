@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     // Route::get('/categories/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
     // Route::post('/categories/delete/{id}', [CategoryController::class, 'destroy'])->name('category.edit');
     Route::resource('category', CategoryController::class);
+    
 
 });
 

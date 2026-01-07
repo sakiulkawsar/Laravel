@@ -85,7 +85,13 @@
         <!-- Main content -->
         <div class="content">
             <div class="card">
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                    @endif
                 <div class="card-body">
+                    
                     <h4 class="text-black">Category list <span class="pull-right"> <a class="btn btn-primary" href="{{route('category.create') }}">Add
                                 Category</a></span></h4>
 
@@ -94,19 +100,28 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col"> Name</th>
-                                <th scope="col"> Action</th>
+                                <th scope="col" colspan="2"> Action</th>
 
                             </tr>
                         </thead>
                         @foreach ($cats as $cat)
                             <tbody>
                                 <tr>
+                                    <form method="post" action="{{route('category.destroy',$cat->id)}}">
+                                        @csrf
+                                        @method('delete')
                                     <th scope="row">{{ $cat->id }}</th>
                                     <td>{{ $cat->name }}</td>
                                     <td>
-                                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                        <a href="{{route('category.edit',$cat->id)}}" class="btn btn-info">edit</button>
+                                        <button type="submit" class="btn btn-danger">delete</button>
                                     </td>
+                                    <!-- <td>
+                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+
+                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                    </td> -->
+                                    </form>
 
                                 </tr>
                         @endforeach

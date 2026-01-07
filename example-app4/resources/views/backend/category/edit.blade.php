@@ -11,46 +11,118 @@
 <meta name="keywords" content="admin, admin dashboard, admin template, cms, crm, Biz Admin, Biz Adminadmin, premium admin templates, responsive admin, sass, panel, software, ui, visualization, web app, application" />
 <meta name="author" content="uxliner"/>
 <!-- v4.1.3 -->
-<link rel="stylesheet" href="dist/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="{{url('')}}/dist/bootstrap/css/bootstrap.min.css">
 
 <!-- Favicon -->
-<link rel="icon" type="image/png" sizes="16x16" href="dist/img/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="16x16" href="{{url('')}}/dist/img/favicon-16x16.png">
 
 <!-- Google Font -->
 <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
 
 <!-- Theme style -->
-<link rel="stylesheet" href="dist/css/style.css">
-<link rel="stylesheet" href="dist/css/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="dist/css/et-line-font/et-line-font.css">
-<link rel="stylesheet" href="dist/css/themify-icons/themify-icons.css">
-<link rel="stylesheet" href="dist/css/simple-lineicon/simple-line-icons.css">
-<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+<link rel="stylesheet" href="{{url('')}}/dist/css/style.css">
+<link rel="stylesheet" href="{{url('')}}/dist/css/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="{{url('')}}/dist/css/et-line-font/et-line-font.css">
+<link rel="stylesheet" href="{{url('')}}/dist/css/themify-icons/themify-icons.css">
+<link rel="stylesheet" href="{{url('')}}/dist/css/simple-lineicon/simple-line-icons.css">
+<link rel="stylesheet" href="{{url('')}}/dist/css/skins/_all-skins.min.css">
+
+<!-- form wizard -->
+<link rel="stylesheet" href="{{url('')}}/dist/plugins/formwizard/jquery-steps.css">
 
 
 </head>
 @endsection("content")
 
 @section("script")
-
 <!-- jQuery 3 --> 
-<script src="dist/js/jquery.min.js"></script>  
-<script src="dist/bootstrap/js/bootstrap.min.js"></script> 
+<script href="{{url('')}}/dist/js/jquery.min.js"></script>  
+<script href="{{url('')}}/dist/bootstrap/js/bootstrap.min.js"></script> 
 
 <!-- template --> 
-<script src="dist/js/bizadmin.js"></script> 
-
-<!-- Jquery Sparklines --> 
-<script src="dist/plugins/jquery-sparklines/jquery.sparkline.min.js"></script> 
-<script src="dist/plugins/jquery-sparklines/sparkline-int.js"></script> 
-
-<!-- Morris JavaScript --> 
-<script src="dist/plugins/raphael/raphael-min.js"></script> 
-<script src="dist/plugins/morris/morris.js"></script> 
-<script src="dist/plugins/functions/dashboard1.js"></script> 
+<script href="{{url('')}}/dist/js/bizadmin.js"></script> 
 
 <!-- for demo purposes --> 
-<script src="dist/js/demo.js"></script>
+<script href="{{url('')}}/dist/js/demo.js"></script>
+
+<!-- form wizard --> 
+<script href="{{url('')}}/dist/plugins/formwizard/jquery-steps.js"></script> 
+<script href="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script> 
+<script>
+    var frmRes = $('#frmRes');
+    var frmResValidator = frmRes.validate();
+	
+    var frmInfo = $('#frmInfo');
+    var frmInfoValidator = frmInfo.validate();
+
+    var frmLogin = $('#frmLogin');
+    var frmLoginValidator = frmLogin.validate();
+
+    var frmMobile = $('#frmMobile');
+    var frmMobileValidator = frmMobile.validate();
+
+    $('#demo1').steps({
+      onChange: function (currentIndex, newIndex, stepDirection) {
+        console.log('onChange', currentIndex, newIndex, stepDirection);
+        // tab1
+        if (currentIndex === 0) {
+          if (stepDirection === 'forward') {
+            var valid = frmRes.valid();
+            return valid;
+          }
+          if (stepDirection === 'backward') {
+            frmResValidator.resetForm();
+          }
+        }
+		
+		// tab2
+        if (currentIndex === 1) {
+          if (stepDirection === 'forward') {
+            var valid = frmInfo.valid();
+            return valid;
+          }
+          if (stepDirection === 'backward') {
+            frmInfoValidator.resetForm();
+          }
+        }
+
+        // tab3
+        if (currentIndex === 2) {
+          if (stepDirection === 'forward') {
+            var valid = frmLogin.valid();
+            return valid;
+          }
+          if (stepDirection === 'backward') {
+            frmLoginValidator.resetForm();
+          }
+        }
+
+        // tab4
+        if (currentIndex === 3) {
+          if (stepDirection === 'forward') {
+            var valid = frmMobile.valid();
+            return valid;
+          }
+          if (stepDirection === 'backward') {
+            frmMobileValidator.resetForm();
+          }
+        }
+
+        return true;
+
+      },
+      onFinish: function () {
+        alert('Wizard Completed');
+      }
+    });
+  </script> 
+<script>
+    $('#demo').steps({
+      onFinish: function () {
+        alert('Wizard Completed');
+      }
+    });
+  </script>
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
@@ -68,12 +140,57 @@ s0.parentNode.insertBefore(s1,s0);
 
 
 @section('content')
- <div class="content-wrapper"> 
+   <div class="content-wrapper"> 
+    <!-- Content Header (Page header) -->
+    <div class="content-header sty-one">
+      <h1 class="text-white">Form Layouts</h1>
+      <ol class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><i class="fa fa-angle-right"></i> <a href="#">Form</a></li>
+        <li><i class="fa fa-angle-right"></i> Form Layouts</li>
+      </ol>
+    </div>
+    
+    <!-- Main content -->
+    <div class="content">
+      <div class="row">
+            @if ($errors->any())
+              <div class="alert alert-danger">
+                 
+                      @foreach ($errors->all() as $error)
+                          <div>{{ $error }}</div>
+                      @endforeach
+                 
+              </div>
+            
+          @endif 
+        <div class="col-lg-12">
+          <div class="card card-outline">
+            <div class="card-header bg-blue">
+              <h5 class="text-white m-b-0">Basic Example</h5>
+            </div>
+            <div class="card-body">
+              <form method="post" action="{{ route('category.update', $category->id) }}">
+                @csrf
+                @method('PUT')
+              <div class="form-group">
+                <label for="exampleInputEmail1">Category Name</label>
+                <input type="text" name="cat_name" value="{{!old('cat_name') ? $category->name :old('cat_name') }}" class="form-control" id="exampleInputEmail1" placeholder="Name">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Submit</label>
+               <button type="submit" class="btn btn-success">submit</button>
+              </div>
+              
+
+    </div>
+    <!-- /.content --> 
+  </div>
     <!-- Content Header (Page header) -->
     <div class="content-header sty-one">
       <h1>Dashboard</h1>
       <ol class="breadcrumb">
-        <li><a href="#">Home</a></li>
+        <li><a href="{{url('')}}/#">Home</a></li>
         <li><i class="fa fa-angle-right"></i> Dashboard</li>
       </ol>
     </div>
@@ -88,7 +205,7 @@ s0.parentNode.insertBefore(s1,s0);
                 <div class="col-md-6 text-white">
                   <p>Total Balance</p>
                   <h2 class="font-weight-bold">$15,859</h2>
-                  <a href="#">View Statement</a> </div>
+                  <a href="{{url('')}}/#">View Statement</a> </div>
                 <div class="col-md-6 m-t-2 text-right"> <span id="spa-bar"></span> </div>
               </div>
             </div>
@@ -101,7 +218,7 @@ s0.parentNode.insertBefore(s1,s0);
                 <div class="col-md-6 text-white">
                   <p>Online Revenue</p>
                   <h2 class="font-weight-bold">$8,859</h2>
-                  <a href="#">View Statement</a> </div>
+                  <a href="{{url('')}}/#">View Statement</a> </div>
                 <div class="col-md-6 m-t-2 text-right"> <span id="spa-line"></span> </div>
               </div>
             </div>
@@ -114,7 +231,7 @@ s0.parentNode.insertBefore(s1,s0);
                 <div class="col-md-6 text-white">
                   <p>Total Profit</p>
                   <h2 class="font-weight-bold">$85,085</h2>
-                  <a href="#">View Statement</a> </div>
+                  <a href="{{url('')}}/#">View Statement</a> </div>
                 <div class="col-md-6 m-t-2 text-right"> <span id="spa-pie"></span> </div>
               </div>
             </div>
