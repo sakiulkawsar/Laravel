@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProdudctController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,7 @@ Route::middleware('auth')->group(function () {
     // Route::get('/categories/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
     // Route::post('/categories/delete/{id}', [CategoryController::class, 'destroy'])->name('category.edit');
     Route::resource('category', CategoryController::class);
+    Route::resource('product',ProdudctController::class);
     
 
 });
