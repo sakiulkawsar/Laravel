@@ -118,7 +118,7 @@
                                    <td>{{ $item->price }}</td>
                                     <td>{{ $item->stock }}</td>
                                    
-                                    <td>{{ $item->category_id }}</td>
+                                    <td>{{ $item->category->name }}</td>
                                   
                                     <td>
                                         <a href="{{route('product.edit',$item->id)}}" class="btn btn-info">edit</button>
