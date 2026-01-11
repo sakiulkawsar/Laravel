@@ -5,21 +5,7 @@
 <body class="skin-blue sidebar-mini">
 <div class="wrapper boxed-wrapper">
     <!-- header will include here -->
-
-@if(Auth::guard('web')->check())
-@include("backend.layouts.header")
-@elseif (Auth::guard('admin')->check())
-@include("backend.layouts.adminHeader")
-@endif
-
-
      @include("backend.layouts.header");
-     
-@if(Auth::guard('web')->check())
-@include("backend.layouts.sidebar")
-@elseif (Auth::guard('admin')->check())
-@include("backend.layouts.admimSidebar")
-@endif
   
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar"> 

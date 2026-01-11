@@ -1,20 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Auth\Admin;
+namespace App\Http\Controllers\Auth\Manager;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
-use App\Models\Admin;
-use App\Providers\RouteServiceProvider;
 
 class LoginController extends Controller
 {
     public function create()
     {
-        return view('auth.admin-login');
+        return view('auth.manage-login'); // Make sure this view exists
     }
 
     public function store(Request $request): RedirectResponse
@@ -24,27 +22,25 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        if (! Auth::guard('admin')->attempt($credentials)) {
+        if (! Auth::guard('manager')->attempt($credentials)) {
             throw ValidationException::withMessages([
-                'email' => 'Invalid admin credentials.',
+                'email' => 'Invalid manager credentials.',
             ]);
         }
 
         $request->session()->regenerate();
 
-        return redirect(RouteServiceProvider::ADMIN_DASHBOARD);
+        // Change this to your manager dashboard route
+        return redirect('/manager/dashboard');
     }
 
     public function logout(Request $request): RedirectResponse
     {
-        Auth::guard('admin')->logout();
+        Auth::guard('manager')->logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/admin/login');
+        return redirect('/manager/login');
     }
-    
-
 }
-

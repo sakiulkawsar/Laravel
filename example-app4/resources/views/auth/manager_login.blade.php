@@ -39,7 +39,7 @@
 <div class="login-box">
   <div class="login-box-body">
     <h3 class="login-box-msg">Sign In</h3>
-    <form action="{{ route('admin.login') }}" method="post">
+    <form action="{{ route('manager.login') }}" method="post">
         @csrf
       <div class="form-group has-feedback">
         <input type="email" name="email" class="form-control sty1" placeholder="User">
@@ -57,19 +57,19 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-4 m-t-1">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Manage Sign In</button>
         </div>
         <!-- /.col --> 
       </div>
     </form>
     <div class="social-auth-links text-center">
       <p>- OR -</p>
-      <a href="{{url('')}}/#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using
+      <a href="{{url('')}}/#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i>Manager Sign in using
       Facebook</a> <a href="{{url('')}}/#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using
       Google+</a> </div>
     <!-- /.social-auth-links -->
     
-    <div class="m-t-2">Don't have an account? <a href="{{url('')}}/pages-register.html" class="text-center">Sign Up</a></div>
+    <div class="m-t-2">Don't have an account? <a href="{{url('')}}/pages-register.html" class="text-center">Manager Sign Up</a></div>
   </div>
   <!-- /.login-box-body --> 
 </div>

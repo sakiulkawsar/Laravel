@@ -38,7 +38,7 @@ Route::middleware('auth')->group(function () {
     
 
 });
-Route::middleware('guest:admin')->prefix('admin')->group( function () {
+Route::middleware('guest:admin')->prefix('manager')->group( function () {
 
     Route::get('login', [App\Http\Controllers\Auth\Admin\LoginController::class, 'create'])->name('admin.login');
     Route::post('login', [App\Http\Controllers\Auth\Admin\LoginController::class, 'store']);
@@ -48,12 +48,14 @@ Route::middleware('guest:admin')->prefix('admin')->group( function () {
 
 });
 
-Route::middleware('auth:admin')->prefix('admin')->group( function () {
+Route::middleware('auth:admin')->prefix('manager')->group( function () {
 
     //Route::post('logout', [App\Http\Controllers\Auth\Admin\LoginController::class, 'destroy'])->name('admin.logout');
 
-    Route::view('/dashboard','admin.dashboard');
+    Route::view('dashboard','backend.admin_dashboard');
 
 });
+
+//Admin login , logout , Registration
 
 require __DIR__.'/auth.php';
