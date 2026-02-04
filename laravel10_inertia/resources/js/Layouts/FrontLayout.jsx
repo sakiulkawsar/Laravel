@@ -1,20 +1,21 @@
-import TopBar from '@/Components/TopBar'
-import React, { Children } from 'react'
-import NavBar from '@/Components/NavBar'
-import Footer from '@/Components/Footer'
+import React from "react";
+import Topbar from "@/Components/Topbar";
+import Navbar from "@/Components/Navbar";
+import Footer from "@/Components/Footer";
 
-function FrontLayout({Children}) {
-  return (
-    <>
-      <TopBar />
+function Frontlayout({ children }) {
+    return (
+        <>
+            <Topbar />
+            
+            <Navbar/>
+            
 
-      <NavBar />
+            {children}
 
-      {Children}
-
-      <Footer />
-    </>
-  )
+            <Footer/>
+        </>
+    );
 }
 
-export default FrontLayout
+export default Frontlayout;
